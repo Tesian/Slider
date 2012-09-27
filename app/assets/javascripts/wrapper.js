@@ -80,6 +80,8 @@ $(document).ready(function(){
         var father =	$("div.slide-active");
 
 	if (child.length != 0) {
+	    father.stop(true, true);
+	    child.stop(true, true);
 	    father.removeClass('slide-active');	    
 	    // $("#wrapper").queue(function() {
 	    father.animate({'left': '-1000px'}, 1500);
@@ -100,6 +102,8 @@ $(document).ready(function(){
 	var father =	$("div#article_" + ($('.slide-active').data("id") - 1));
 
 	if (father.length != 0) {
+	    father.stop(true, true);
+	    child.stop(true, true);
     	    child.removeClass('slide-active');
 	    // if (save_time + 1500 < time.getTime())
 	    // {
