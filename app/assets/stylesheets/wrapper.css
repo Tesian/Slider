@@ -17,9 +17,16 @@
     position:		absolute;
     width:		760px;
     height:		1100px;
-    left:		1000px;
     top:		0px;
 }
+
+#wrapper h3 {
+    text-align:		center;
+}
+
+/*#wrapper .standard_link {
+    text-align:		left;
+}*/
 
 #wrapper #article_1 {
     left:		0px;

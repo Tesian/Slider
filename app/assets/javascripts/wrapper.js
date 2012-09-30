@@ -1,68 +1,40 @@
 $(document).ready(function(){
 
-    // global
     var uid = 0;
-    // var time = new Date(0, 0, 0, 0, 0, 0, 0);
-    // var save_time = time.getTime();
 
-    // function wait() {
-    // 	while (have_event_now() == true) {}
-    // }
+    function create_article(id, el)
+    {
+	if ($("div#article_" + id).length == 0)
+	{
+	    var data;
+	    $.ajax({
+		url: "../articles/" + id,
+		dataType: 'json',
+		data: data,
+		success: function(data){
+		    var new_article = document.createElement("div");
+		    new_article.setAttribute("id", "article_" + data["id"]);
+		    new_article.setAttribute("data-id", data["id"]);
 
-    // function have_event_now() {
-    // 	child = $("#wrapper div:eq(0)");
-    // 	i = 0;
-    // 	while (child.length != 0) {
-    // 	    i++;
-    // 	    if (child.queue().length != 0) {
-    // 		return true;
-    // 	    }
-    // 	    selector = "#wrapper div:eq(" + i + ")";
-    // 	    child = $(selector);
-    // 	}
-    // 	return false;
-    // }
+		    var title = document.createElement("h3");
+		    title.innerHTML =  data["title"];
+		    new_article.appendChild(title);
 
-    // function sleep(time) {
-    // 	var date = new Date();
-    // 	var start = date.getTime();
-    // 	while (start + time > date.getTime()) true;
-    // 	return;
-    // }
+		    var body = document.createElement("p");
+		    body.innerHTML = data["body"];
+		    new_article.appendChild(body);
 
-    // function sleep2(ms) {
-    // 	var notifier = new EventNotifier ();
-    // 	setTimeout(notifier, ms);
-    // 	notifier.wait->();
-    // }
-
-    // function end_animate()
-    // {
-    // 	sleep(15);
-    // 	$('#wrapper').dequeue();
-    // }
-
-    // function animate(size, element)
-    // {
-    	// if ( typeof this.animate == 'undefined') this.animate = 0;
-
-	
-    // if (el == 'undefined')
-    // {
-    //     this.animate = 0;
-    //     alert('salut');
-    // }
-    // while (this.animate == 0) {}
-    // if (element)
-    // {
-    //     alert(element);
-    // this.animate = 1;
-    // 	    $('#wrapper').queue(function(element, size) {
-    // 		element.animate({'left': size}, {duration: 1500, complete: animate()});
-    // 		this.dequeue();
-    // 	    });
-    // 	}
-    // }
+		    document.getElementById('wrapper').appendChild(new_article);
+		    $("#article_" + id).css("left", "1000px");
+		    make_event(el);
+		}
+	    });
+	}
+	else
+	{
+	    make_event(el);
+	}
+    }
 
     function make_event(el) {
     	if ((el.attr("class") == "on_child" && $('#wrapper').slideToNext() == true) ||
@@ -76,21 +48,16 @@ $(document).ready(function(){
 
     // a element call a child, this element go center=>left and the child go right=>center
     $.fn.slideToNext = function( ) {
-        var child =	$("div#article_" + ($('.slide-active').data("id") + 1));
-        var father =	$("div.slide-active");
+        var child =	$("#article_" + ($('.slide-active').data("id") + 1));
+	var father =	$("div.slide-active");
 
 	if (child.length != 0) {
-	    father.stop(true, true);
-	    child.stop(true, true);
+
 	    father.removeClass('slide-active');	    
-	    // $("#wrapper").queue(function() {
 	    father.animate({'left': '-1000px'}, 1500);
-	    // });
 	    
 	    child.addClass('slide-active');
-	    // $("#wrapper").queue(function() {
 	    child.animate({'left': '0px'}, 1500);
-	    // });
 	    return (true);
 	}
 	return (false);
@@ -99,29 +66,15 @@ $(document).ready(function(){
     // a element call his father, this element go center=>right and the father go left=>center
     $.fn.slideToPrev = function( ) {
     	var child = 	$("div.slide-active");
-	var father =	$("div#article_" + ($('.slide-active').data("id") - 1));
+	var father =	$("#article_" + ($('.slide-active').data("id") - 1));
 
 	if (father.length != 0) {
-	    father.stop(true, true);
-	    child.stop(true, true);
+
     	    child.removeClass('slide-active');
-	    // if (save_time + 1500 < time.getTime())
-	    // {
-	    // 	child.animate({'left': '1000px'}, 1500);
-	    // }
-	    // else
-	    // {
-	    // 	setTimeout(function() {
 	    child.animate({'left': '1000px'}, 1500);
-	    // 	}, (time.getTime() - save_time) + 1500);
-	    // }
-	    // save_time = time.getTime();
 
     	    father.addClass('slide-active');
-	    // setTimeout(function() {
 	    father.animate({'left': '0px'}, 1500);
-	    // }, (time.getTime() - save_time) + 1500);
-	    // save_time = time.getTime();
 	    return (true);
 	}
 	return (false);
@@ -129,48 +82,15 @@ $(document).ready(function(){
 
     // a element call a child
 
-    $(".on_child, .on_father").click(function(e){
-	e.preventDefault();
-	// if (save_time + 1 > time.getTime())
-	// {
-	//     alert("Goodbye");
-	    make_event($(this));
-	// }
-	// else
-	// {
-	//     alert("salut");
-	//     var el = $(this)
-	//     setTimeout(function() { 
-    	// 	if (($(this).attr("class") == "on_child" && $('#wrapper').slideToNext() == true) || ($(this).attr("class") == "on_father" && $('#wrapper').slideToPrev() == true))
-	// 	{
-	// 	    uid++;
-	// 	    history.pushState({uid: uid, last_move: "next"}, "", "/articles/" + $('.slide-active').data("id"));	    
-	// 	}
-	//     } , (time.getTime() - save_time) + 1500);
-	// }
-	// save_time = time.getTime();
+    $(".on_child").click(function(e){
+    	e.preventDefault();
+	create_article($('.slide-active').data("id") + 1, $(this));
     });
 
-    // $(".on_child").click(function(e){
-    // 	// wait();
-    // 	e.preventDefault();
-    // 	if ($('#wrapper').slideToNext() == true)
-    // 	{
-    // 	    uid++;
-    // 	    history.pushState({uid: uid, last_move: "next"}, "", "/articles/" + $('.slide-active').data("id"));
-    // 	}
-    // });
-
-    // // a element call his father
-    // $(".on_father").click(function(e){
-    // 	// wait();
-    // 	e.preventDefault();
-    // 	if ($('#wrapper').slideToPrev() == true)
-    // 	{
-    // 	    uid++;
-    // 	    history.pushState({uid: uid, last_move: "prev"}, "", "/articles/" + $('.slide-active').data("id"));
-    // 	}
-    // });
+    $(".on_father").click(function(e){
+    	e.preventDefault();
+	create_article($('.slide-active').data("id") - 1, $(this));
+    });
 
     // gestion du clic sur le bouton précédent du navigateur
     $(window).bind('popstate', function(event) {
