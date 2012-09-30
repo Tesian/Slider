@@ -98,7 +98,7 @@ $(document).ready(function(){
 	setTimeout(function(){
 	    $(".on_child").show();
 	}
-		   , 1500);
+		   , 1300);
     });
 
     $(".on_father").click(function(e){
@@ -108,7 +108,7 @@ $(document).ready(function(){
 	setTimeout(function(){
 	    $(".on_father").show();
 	}
-		   , 1500);
+		   , 1300);
     });
 
     // gestion du clic sur le bouton précédent du navigateur
