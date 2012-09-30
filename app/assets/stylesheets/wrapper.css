@@ -1,5 +1,16 @@
 /* Wrapper
 -------------------------*/
+
+a.on_child {
+    position: absolute;
+    left: 1150px;
+}
+
+a.on_father {
+    position: absolute;
+    left: 130px;
+}
+
 #wrapper {
     background-color:	gray;
     overflow:		hidden;
@@ -22,12 +33,4 @@
 
 #wrapper h3 {
     text-align:		center;
-}
-
-/*#wrapper .standard_link {
-    text-align:		left;
-}*/
-
-#wrapper #article_1 {
-    left:		0px;
 }
