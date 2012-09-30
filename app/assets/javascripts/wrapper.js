@@ -84,12 +84,22 @@ $(document).ready(function(){
 
     $(".on_child").click(function(e){
     	e.preventDefault();
+	$(this).hide();
 	create_article($('.slide-active').data("id") + 1, $(this));
+	setTimeout(function(){
+	    $(".on_child").show();
+	}
+		   , 1500);
     });
 
     $(".on_father").click(function(e){
     	e.preventDefault();
+	$(this).hide();
 	create_article($('.slide-active').data("id") - 1, $(this));
+	setTimeout(function(){
+	    $(".on_father").show();
+	}
+		   , 1500);
     });
 
     // gestion du clic sur le bouton précédent du navigateur
