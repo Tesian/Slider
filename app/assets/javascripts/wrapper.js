@@ -25,7 +25,16 @@ $(document).ready(function(){
 		    new_article.appendChild(body);
 
 		    document.getElementById('wrapper').appendChild(new_article);
-		    $("#article_" + id).css("left", "1000px");
+		    console.log(el);
+		    if (el.hasClass("on_child"))
+		    {
+			$("#article_" + id).css("left", "1000px");
+		    }
+		    else
+		    {
+			$("#article_" + id).css("left", "-1000px");
+
+		    }
 		    make_event(el);
 		}
 	    });
